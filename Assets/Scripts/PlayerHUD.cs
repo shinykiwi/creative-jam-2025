@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -36,5 +37,21 @@ public class PlayerHUD : MonoBehaviour
     private void SetHelperText(string text)
     {
         helperTextObject.text = text;
+    }
+
+    public void HideHelperText()
+    {
+        helperTextObject.gameObject.SetActive(false);
+    }
+
+    public void ShowHelperText()
+    {
+        helperTextObject.gameObject.SetActive(true);
+    }
+
+    private void Start()
+    {
+        HelperText = "";
+        HideHelperText();
     }
 }

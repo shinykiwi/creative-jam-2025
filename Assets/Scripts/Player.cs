@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private PlayerInputSwitcher playerInputSwitcher;
     private PlayerHUD playerHUD;
     private PlayerRaycast playerRaycast;
+    private CameraController cameraController;
     
 
     private void Awake()
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
         playerInputSwitcher = GetComponent<PlayerInputSwitcher>();
         playerHUD = GetComponentInChildren<PlayerHUD>();
         playerRaycast = GetComponentInChildren<PlayerRaycast>();
+        cameraController = GetComponentInChildren<CameraController>();
     }
 
     public void EnableMovement()
@@ -47,8 +49,28 @@ public class Player : MonoBehaviour
         if (!playerRaycast.LastItem) return;
         
         // If the player is looking at an object they can pick up
-        playerRaycast.LastItem.GetComponent<Item>().OnInteract();
+        playerRaycast.LastItem.GetComponent<Item>().OnInteract(this);
         playerRaycast.LastItem = null;
+        
+        playerHUD.HideHelperText();
+    }
+
+    public void OnExit()
+    {
+        switch (state)
+        {
+            case PlayerState.Exploring:
+                // Bring up the pause menu
+                break;
+            case PlayerState.InMenu:
+                // Exit the current menu
+                break;
+            case PlayerState.InTerminal:
+                // Exit the terminal
+                cameraController.DisableTerminalCamera();
+                SetState(PlayerState.Exploring);
+                break;
+        }
     }
 
     public void SetState(PlayerState newState)
@@ -71,6 +93,7 @@ public class Player : MonoBehaviour
                 fpc.enabled = false;
                 playerInputSwitcher.ActivateTerminalInput();
                 playerHUD.gameObject.SetActive(false);
+                cameraController.EnableTerminalCamera();
                 break;
         }
     }

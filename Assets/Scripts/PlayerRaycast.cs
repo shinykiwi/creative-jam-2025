@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerRaycast : MonoBehaviour
 {
     public GameObject LastItem { get; set; } = null;
+
+    private PlayerHUD playerHUD;
+
+    private void Awake()
+    {
+        playerHUD = transform.parent.GetComponentInChildren<PlayerHUD>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -12,7 +20,7 @@ public class PlayerRaycast : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         // If something was hit
-        if (Physics.Raycast(ray, out RaycastHit hit, 8f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 4f))
         {
             GameObject hitObject = hit.collider.gameObject;
 
@@ -20,11 +28,19 @@ public class PlayerRaycast : MonoBehaviour
             {
                 LastItem = hitObject;
                 item.OnLookAt();
+                playerHUD.ShowHelperText();
+                playerHUD.HelperText = item.GetDisplayName();
+            }
+            else
+            {
+                LastItem = null;
+                playerHUD.HideHelperText();
             }
         }
         else
         {
             LastItem = null;
+            playerHUD.HideHelperText();
         }
     }
 }

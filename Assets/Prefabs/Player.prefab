@@ -71,6 +71,7 @@ Transform:
   - {fileID: 7499245521487185743}
   - {fileID: 9082514945655162696}
   - {fileID: 4349040681142604145}
+  - {fileID: 3641495695925711134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &5756981506445372901
@@ -289,6 +290,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+--- !u!1 &4522354558692005302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3641495695925711134}
+  - component: {fileID: 1522632244528142274}
+  m_Layer: 8
+  m_Name: CameraController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3641495695925711134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522354558692005302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3779620288515682135}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1522632244528142274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522354558692005302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96f0918bbfd24238b48a8eab6b127ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  terminalCamera: {fileID: 0}
 --- !u!1 &5313227708343548894
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +348,7 @@ GameObject:
   - component: {fileID: 2473516184034370754}
   - component: {fileID: 7042804770616014449}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HelperText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,6 +650,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4390824303980128790, guid: 44362b96e72884e14a92c9c3706ba64e, type: 3}
+      propertyPath: helperTextObject
+      value: 
+      objectReference: {fileID: 7042804770616014449}
     - target: {fileID: 4739953653913174748, guid: 44362b96e72884e14a92c9c3706ba64e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
