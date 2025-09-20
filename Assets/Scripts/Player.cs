@@ -32,6 +32,12 @@ public class Player : MonoBehaviour
         playerHUD = GetComponentInChildren<PlayerHUD>();
         playerRaycast = GetComponentInChildren<PlayerRaycast>();
         cameraController = GetComponentInChildren<CameraController>();
+        PauseMenu.onResume += ResumeGame;
+    }
+
+    private void OnDestroy()
+    {
+        PauseMenu.onResume -= ResumeGame;
     }
 
     public void EnableMovement()
@@ -48,6 +54,11 @@ public class Player : MonoBehaviour
     {
         fpc.canLook = true;
     }
+
+    private void ResumeGame()
+    {
+        SetState(PlayerState.Exploring);
+    }
     
     public void OnInteract()
     {
@@ -59,9 +70,6 @@ public class Player : MonoBehaviour
         // If the player is looking at an object they can pick up
         playerRaycast.LastItem.GetComponent<Item>().OnInteract(this);
         playerRaycast.LastItem = null;
-        
-        
-        
         playerHUD.HideHelperText();
     }
 
@@ -94,17 +102,23 @@ public class Player : MonoBehaviour
                 fpc.enabled = true;
                 playerInputSwitcher.ActivatePlayerInput();
                 playerHUD.gameObject.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
                 break;
             case PlayerState.InMenu:
                 fpc.enabled = false;
                 playerInputSwitcher.ActivateUIInput();
                 playerHUD.gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
                 break;
             case PlayerState.InTerminal:
                 fpc.enabled = false;
                 playerInputSwitcher.ActivateTerminalInput();
                 playerHUD.gameObject.SetActive(false);
                 cameraController.EnableTerminalCamera();
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 1;
                 break;
         }
     }
