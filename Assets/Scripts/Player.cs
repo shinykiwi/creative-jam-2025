@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerHand playerHand;
     
     public PlayerHand PlayerHand => playerHand;
+    
+    public delegate void OnPause();
+    public static OnPause onPause;
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour
         playerHUD = GetComponentInChildren<PlayerHUD>();
         playerRaycast = GetComponentInChildren<PlayerRaycast>();
         cameraController = GetComponentInChildren<CameraController>();
+        
     }
 
     public void EnableMovement()
@@ -66,7 +70,8 @@ public class Player : MonoBehaviour
         switch (state)
         {
             case PlayerState.Exploring:
-                // Bring up the pause menu
+                onPause?.Invoke();
+                SetState(PlayerState.InMenu);
                 break;
             case PlayerState.InMenu:
                 // Exit the current menu
