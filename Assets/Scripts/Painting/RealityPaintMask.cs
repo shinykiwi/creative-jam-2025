@@ -33,7 +33,6 @@ using UnityEngine;
         {
             int x = (int)(uv.x * maskResolution);
             int y = (int)(uv.y * maskResolution);
-            bool flag = true;
 
             for (int i = -(int)brushSize; i < brushSize; i++)
             {
@@ -52,12 +51,6 @@ using UnityEngine;
 
                             // Smooth transition using Lerp
                             float newValue = Mathf.Lerp(current.r, targetValue, strength);
-                            /*if (newValue >= 0.95)
-                            {
-                                newValue = 1f;
-                            }
-                            */
-                                
 
                             // Update paintedPixels count only when crossing thresholds
                             if (add && current.r < 1f && newValue >= 1f)
