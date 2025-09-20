@@ -17,7 +17,9 @@ public class Player : MonoBehaviour
     private PlayerHUD playerHUD;
     private PlayerRaycast playerRaycast;
     private CameraController cameraController;
+    [SerializeField] private PlayerHand playerHand;
     
+    public PlayerHand PlayerHand => playerHand;
 
     private void Awake()
     {
@@ -46,11 +48,15 @@ public class Player : MonoBehaviour
     public void OnInteract()
     {
         if (state != PlayerState.Exploring) return;
+        Debug.Log("Interact");
+        if (playerHand.IsHoldingItem) playerHand.DropItem();
         if (!playerRaycast.LastItem) return;
         
         // If the player is looking at an object they can pick up
         playerRaycast.LastItem.GetComponent<Item>().OnInteract(this);
         playerRaycast.LastItem = null;
+        
+        
         
         playerHUD.HideHelperText();
     }
