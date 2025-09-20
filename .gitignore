@@ -73,3 +73,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+ProjectSettings/InkSettings.asset
+ProjectSettings/EditorBuildSettings.asset
+ProjectSettings/EditorBuildSettings.asset
+ProjectSettings/InkSettings.asset
