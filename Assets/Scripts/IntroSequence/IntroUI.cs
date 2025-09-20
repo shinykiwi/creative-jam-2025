@@ -23,7 +23,6 @@ namespace IntroSequence
         private bool storyReady = false;
         private bool isInChoices = false;
         private string lastStoryLine;
-        private string str = "This is a very very long string with many words.";
         private readonly int elementPadding = 1;
     
         void Awake()
@@ -102,7 +101,7 @@ namespace IntroSequence
                 // The end of the story
                 else
                 {
-                    // Should transition to the game here
+                    EndDialogue();
                 }
             }
         }
@@ -135,6 +134,11 @@ namespace IntroSequence
             {
                 Destroy(buttonPanel.transform.GetChild(i).gameObject);
             }
+        }
+
+        private void EndDialogue()
+        {
+            
         }
         
     }
