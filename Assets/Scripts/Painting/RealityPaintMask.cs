@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(MeshCollider))]
     public class RealityPaintMask : MonoBehaviour
     {
         private static readonly int RealityMask = Shader.PropertyToID("_RealityMask");
@@ -9,6 +10,7 @@ using UnityEngine;
         public bool isVisible;
         public int maskResolution = 512;
         private int paintedPixels = 0;
+        public Texture2D brushMask; // Assign in inspector (must be readable)
         private float PaintedPercent => 2*paintedPixels / (float)(maskResolution*maskResolution);
 
         [Range(0f, 1f)] public float threshold;
@@ -27,50 +29,50 @@ using UnityEngine;
             rend.material.SetTexture(RealityMask, maskTex);
         }
 
-        public void PaintAtUV(Vector2 uv, float brushSize, bool add = true)
+        public void PaintAtUV(Vector2 uv, float brushSize, bool add = true, float strength = 0.1f)
         {
             int x = (int)(uv.x * maskResolution);
             int y = (int)(uv.y * maskResolution);
-            
-            for (int i = - (int)brushSize; i < brushSize; i++)
+            bool flag = true;
+
+            for (int i = -(int)brushSize; i < brushSize; i++)
             {
-                for (int j = - (int)brushSize; j < brushSize; j++)
+                for (int j = -(int)brushSize; j < brushSize; j++)
                 {
                     int px = x + i;
                     int py = y + j;
+
                     if (px >= 0 && px < maskResolution && py >= 0 && py < maskResolution)
                     {
                         float dist = Vector2.Distance(new Vector2(x, y), new Vector2(px, py));
                         if (dist < brushSize)
                         {
+                            Color current = maskTex.GetPixel(px, py);
+                            float targetValue = add ? 1.3f : 0f;
 
-                            if (add)
+                            // Smooth transition using Lerp
+                            float newValue = Mathf.Lerp(current.r, targetValue, strength);
+                            /*if (newValue >= 0.95)
                             {
-                                if (maskTex.GetPixel((int)px, (int)py).r == 0f)
-                                {
-                                    paintedPixels++;
-                                    maskTex.SetPixel(px, py, Color.white);
-                                }    
+                                newValue = 1f;
                             }
-                            else
-                            {
-                                if (Mathf.Approximately(maskTex.GetPixel((int)px, (int)py).r, 1f))
-                                {
-                                    paintedPixels--;
-                                    maskTex.SetPixel(px, py, Color.black);
-                                }    
-                            }
-                            
+                            */
+                                
+
+                            // Update paintedPixels count only when crossing thresholds
+                            if (add && current.r < 1f && newValue >= 1f)
+                                paintedPixels++;
+                            else if (!add && current.r > 0f && newValue <= 0f)
+                                paintedPixels--;
+
+                            maskTex.SetPixel(px, py, new Color(newValue, newValue, newValue, 1f));
                         }
-                            
                     }
                 }
             }
-            
 
             maskTex.Apply();
 
-            
             if (PaintedPercent > threshold && !isVisible)
             {
                 Solidify();
@@ -80,6 +82,7 @@ using UnityEngine;
                 Disappear();
             }
         }
+
 
         public void Solidify()
         {
