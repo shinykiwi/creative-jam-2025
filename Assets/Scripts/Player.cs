@@ -31,7 +31,12 @@ public class Player : MonoBehaviour
         playerHUD = GetComponentInChildren<PlayerHUD>();
         playerRaycast = GetComponentInChildren<PlayerRaycast>();
         cameraController = GetComponentInChildren<CameraController>();
-        
+        PauseMenu.onResume = ResumeGame;
+    }
+
+    private void OnDestroy()
+    {
+        PauseMenu.onResume -= ResumeGame;
     }
 
     public void EnableMovement()
@@ -59,12 +64,13 @@ public class Player : MonoBehaviour
         // If the player is looking at an object they can pick up
         playerRaycast.LastItem.GetComponent<Item>().OnInteract(this);
         playerRaycast.LastItem = null;
-        
-        
-        
         playerHUD.HideHelperText();
     }
 
+    void ResumeGame()
+    {
+        SetState(PlayerState.Exploring);
+    }
     public void OnExit()
     {
         switch (state)
@@ -94,17 +100,23 @@ public class Player : MonoBehaviour
                 fpc.enabled = true;
                 playerInputSwitcher.ActivatePlayerInput();
                 playerHUD.gameObject.SetActive(true);
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
                 break;
             case PlayerState.InMenu:
                 fpc.enabled = false;
                 playerInputSwitcher.ActivateUIInput();
                 playerHUD.gameObject.SetActive(false);
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
                 break;
             case PlayerState.InTerminal:
                 fpc.enabled = false;
                 playerInputSwitcher.ActivateTerminalInput();
                 playerHUD.gameObject.SetActive(false);
                 cameraController.EnableTerminalCamera();
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.None;
                 break;
         }
     }

@@ -165,7 +165,7 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   analogMovement: 0
-  cursorLocked: 1
+  cursorLocked: 0
   cursorInputForLook: 1
 --- !u!114 &1925131280166183435
 MonoBehaviour:
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ddb1b96e53c4183ab23dda3ea6e0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHand: {fileID: 0}
 --- !u!114 &4407160626744672025
 MonoBehaviour:
   m_ObjectHideFlags: 0
