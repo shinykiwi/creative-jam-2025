@@ -88,7 +88,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -603,6 +603,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6353849639373630072}
     m_Modifications:
+    - target: {fileID: 75283833914369634, guid: 9c542d1c8b71391428b5a7431ca6b9fc, type: 3}
+      propertyPath: strength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 75283833914369634, guid: 9c542d1c8b71391428b5a7431ca6b9fc, type: 3}
+      propertyPath: brushSize
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1428133010136307991, guid: 9c542d1c8b71391428b5a7431ca6b9fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.48
@@ -646,6 +654,14 @@ PrefabInstance:
     - target: {fileID: 1772852322664137645, guid: 9c542d1c8b71391428b5a7431ca6b9fc, type: 3}
       propertyPath: m_Name
       value: flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697760491350711069, guid: 9c542d1c8b71391428b5a7431ca6b9fc, type: 3}
+      propertyPath: m_Intensity
+      value: 189.47202
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697760491350711069, guid: 9c542d1c8b71391428b5a7431ca6b9fc, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
