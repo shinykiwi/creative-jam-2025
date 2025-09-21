@@ -34,6 +34,11 @@ namespace TerminalSequence
             }
         }
 
+        public List<ItemSO> GetItems()
+        {
+            return items;
+        }
+
         public void AddItem(ItemSO item)
         {
             items.Add(item);

@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
                 // Exit the terminal
                 cameraController.DisableTerminalCamera();
                 SetState(PlayerState.Exploring);
+                FindFirstObjectByType<ConsoleUI>().ToStartUpPage();
                 break;
         }
     }
