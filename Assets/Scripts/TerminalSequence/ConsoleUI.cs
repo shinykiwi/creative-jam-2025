@@ -13,6 +13,8 @@ public class ConsoleUI : MonoBehaviour
     [SerializeField] private GameObject tokensPage;
     [SerializeField] private GameObject idlePage;
 
+    private AudioSource audioSource;
+
     private string itemName;
     private string itemDescription;
     public string ItemName
@@ -42,11 +44,17 @@ public class ConsoleUI : MonoBehaviour
         ToUnlockedPage();
     }
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void ToUnlockedPage()
     {
         unlockedPage.SetActive(true);
         tokensPage.SetActive(false);
         idlePage.SetActive(false);
+        audioSource.Play();
 
         // var items = ItemManager.Instance.GetItems();
         //
