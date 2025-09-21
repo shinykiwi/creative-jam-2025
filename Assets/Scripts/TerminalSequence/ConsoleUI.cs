@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TerminalSequence;
 using TMPro;
 using UnityEngine;
@@ -6,38 +7,18 @@ using UnityEngine.Serialization;
 
 public class ConsoleUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI itemNameText;
-    [SerializeField] private TextMeshProUGUI itemDescriptionText;
+ 
     [SerializeField] private TextMeshProUGUI tokenCountText;
     [SerializeField] private GameObject unlockedPage;
     [SerializeField] private GameObject tokensPage;
     [SerializeField] private GameObject idlePage;
 
+    [SerializeField] private GameObject unlockedPagePrefab;
+
+    private List<GameObject> unlockedPageObjects;
+    private int currentPageID = 0;
+
     private AudioSource audioSource;
-
-    private string itemName;
-    private string itemDescription;
-    public string ItemName
-    {
-        get => itemName;
-
-        set
-        {
-            itemName = value;
-            itemNameText.text = value;
-        }
-    }
-
-    public string ItemDescription
-    {
-        get => itemDescription;
-
-        set
-        {
-            itemDescription = value;
-            itemDescriptionText.text = value;
-        }
-    }
 
     public void OnUnlockButton()
     {
@@ -47,6 +28,7 @@ public class ConsoleUI : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        unlockedPageObjects = new List<GameObject>();
     }
 
     public void ToUnlockedPage()
@@ -55,13 +37,21 @@ public class ConsoleUI : MonoBehaviour
         tokensPage.SetActive(false);
         idlePage.SetActive(false);
         audioSource.Play();
+        
+        var items = ItemManager.Instance.GetItems();
+        
+        foreach (var item in items)
+        {
+            GameObject page = Instantiate(unlockedPagePrefab, transform);
+            UnlockedPage uPage = page.GetComponent<UnlockedPage>();
+            uPage.ItemDescription = item.description;
+            uPage.ItemName = item.itemName;
+            page.SetActive(false);
+            unlockedPageObjects.Add(page);
+        }
 
-        // var items = ItemManager.Instance.GetItems();
-        //
-        // foreach (var item in items)
-        // {
-        //     
-        // }
+        currentPageID = 0;
+        unlockedPageObjects[currentPageID].SetActive(true);
     }
 
     public void ToTokensPage()
