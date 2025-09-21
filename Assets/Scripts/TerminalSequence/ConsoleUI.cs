@@ -48,7 +48,12 @@ public class ConsoleUI : MonoBehaviour
         tokensPage.SetActive(false);
         idlePage.SetActive(false);
 
-        // ItemManager.Instance.GetItems();
+        // var items = ItemManager.Instance.GetItems();
+        //
+        // foreach (var item in items)
+        // {
+        //     
+        // }
     }
 
     public void ToTokensPage()

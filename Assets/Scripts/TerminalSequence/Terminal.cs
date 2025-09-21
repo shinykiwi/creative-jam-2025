@@ -15,7 +15,6 @@ public class Terminal : MonoBehaviour, Item
     {
         player.SetState(PlayerState.InTerminal);
         consoleUI.StartUp();
-        
     }
 
     public void OnLookAt()
