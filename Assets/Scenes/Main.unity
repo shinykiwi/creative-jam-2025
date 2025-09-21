@@ -2536,14 +2536,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2767765201350163768, guid: 97df1411439ab9349975f52cccb15f94, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3914261488661841068, guid: 97df1411439ab9349975f52cccb15f94, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnUnlockButton
-      objectReference: {fileID: 0}
     - target: {fileID: 4010258912967636910, guid: 97df1411439ab9349975f52cccb15f94, type: 3}
       propertyPath: m_Name
       value: Terminal
@@ -2587,10 +2579,6 @@ PrefabInstance:
     - target: {fileID: 4390057010632584468, guid: 97df1411439ab9349975f52cccb15f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611779015910777385, guid: 97df1411439ab9349975f52cccb15f94, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

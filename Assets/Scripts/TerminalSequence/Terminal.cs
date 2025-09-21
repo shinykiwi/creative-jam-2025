@@ -1,29 +1,34 @@
-using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class Terminal : MonoBehaviour, Item
+namespace TerminalSequence
 {
-    private ConsoleUI consoleUI;
-
-    private void Awake()
+    [RequireComponent(typeof(Collider))]
+    public class Terminal : MonoBehaviour, Item
     {
-        consoleUI = GetComponentInChildren<ConsoleUI>();
-    }
+        private ConsoleUI consoleUI;
+        private AudioSource audioSource;
 
-    public void OnInteract(Player player)
-    {
-        player.SetState(PlayerState.InTerminal);
-        consoleUI.StartUp();
-    }
+        private void Awake()
+        {
+            consoleUI = GetComponentInChildren<ConsoleUI>();
+            audioSource = GetComponent<AudioSource>();
+        }
 
-    public void OnLookAt()
-    {
+        public void OnInteract(Player player)
+        {
+            player.SetState(PlayerState.InTerminal);
+            consoleUI.StartUp();
+            audioSource.Play();
+        }
+
+        public void OnLookAt()
+        {
         
-    }
+        }
 
-    public string GetDisplayName()
-    {
-        return "[E] Use Terminal";
+        public string GetDisplayName()
+        {
+            return "[E] Use Terminal";
+        }
     }
 }
