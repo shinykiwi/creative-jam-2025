@@ -15,7 +15,7 @@ public class ConsoleUI : MonoBehaviour
 
     [SerializeField] private GameObject unlockedPagePrefab;
 
-    private List<GameObject> unlockedPageObjects;
+    private List<UnlockedPage> unlockedPages;
     private int currentPageID = 0;
 
     private AudioSource audioSource;
@@ -28,7 +28,7 @@ public class ConsoleUI : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        unlockedPageObjects = new List<GameObject>();
+        unlockedPages = new List<UnlockedPage>();
     }
 
     public void ToUnlockedPage()
@@ -44,14 +44,16 @@ public class ConsoleUI : MonoBehaviour
         {
             GameObject page = Instantiate(unlockedPagePrefab, transform);
             UnlockedPage uPage = page.GetComponent<UnlockedPage>();
-            uPage.ItemDescription = item.description;
-            uPage.ItemName = item.itemName;
+            uPage.SetItemDescription(item.description);
+            uPage.SetItemName(item.itemName);
             page.SetActive(false);
-            unlockedPageObjects.Add(page);
+            unlockedPages.Add(uPage);
         }
 
         currentPageID = 0;
-        unlockedPageObjects[currentPageID].SetActive(true);
+        unlockedPages[currentPageID].gameObject.SetActive(true);
+        unlockedPages[currentPageID].GenerateText();
+        
     }
 
     public void ToTokensPage()

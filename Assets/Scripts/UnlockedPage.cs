@@ -13,15 +13,23 @@ public class UnlockedPage : MonoBehaviour
     {
         textRenderer = GetComponent<TextRenderer>();
     }
-    public string ItemName { get; set; }
-    public string ItemDescription { get; set; }
 
-    public void GenerateText()
+    private string itemName;
+    private string itemDescription;
+
+    public void SetItemName(string text)
     {
-        StartCoroutine(textRenderer.TypewriterEffect(ItemName, itemNameText));
-        StartCoroutine(textRenderer.TypewriterEffect(ItemDescription, itemDescriptionText));
+        itemName = text;
+    }
+
+    public void SetItemDescription(string text)
+    {
+        itemDescription = text;
     }
     
-    
-    
+    public void GenerateText()
+    {
+        // StartCoroutine(textRenderer.TypewriterEffect(itemName, itemNameText));
+        // StartCoroutine(textRenderer.TypewriterEffect(itemDescription, itemDescriptionText));
+    }
 }
